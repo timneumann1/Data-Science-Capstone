@@ -1,0 +1,1 @@
+The final estimate on R0 for Germany is 2.044 with a 90 percent confidence interval (1.566,2.936). 
