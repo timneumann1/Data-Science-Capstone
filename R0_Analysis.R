@@ -53,17 +53,13 @@ names(lockdowns) = countries
 
 # in some cases, there might not be a specific day at which a lockdown was implemented, but there is no ambiguity about the timing relative to the occurrence of the first infection peak
 for (country in countries) {
-  print(min(plot_data$date) + peaks[country])
   plot_data = data.frame(date = time_series_global[[paste0("time_series_",country)]]$date, cases = time_series_global[[paste0("time_series_",country)]]$cases )
+  #print(min(plot_data$date) + peaks[country])
   plot = plot_data %>% ggplot(aes(x = date, y = cases)) + geom_point()  + 
     geom_vline(xintercept = min(plot_data$date) + peaks[country], color = "red", linewidth=0.5) +
     geom_vline(xintercept = lockdowns[country], linewidth = 0.5) + 
     ggtitle(paste0("Infection curve with peak and lockdown location"))
-  #(time_series_global[[paste0("time_series_",country)]]$date,time_series_global[[paste0("time_series_",country)]]$cases)
   print(plot)
-  # xlim(0,0.5) +ylim(0,1.2)
-  #ratioPlot = ratioPlotData %>% ggplot(aes(x = gamma, y = beta)) + geom_point() + xlim(0,0.5) +ylim(0,1.2) + 
-  #  geom_abline(intercept = 0, slope = coefs[1]) + ggtitle(paste0("R0 = ", coefs[1]))
   #ggsave(sprintf("./runs/%s/R0_Subspaces.png",country),ratioPlot)
 }
 
